@@ -5,8 +5,10 @@
 # @File : views.py
 import os
 from datetime import datetime
-from django.http import HttpResponse
-from django.shortcuts import render, render_to_response
+
+from django.core.exceptions import PermissionDenied
+from django.http import HttpResponse, HttpResponseRedirect, JsonResponse, FileResponse
+from django.shortcuts import render, render_to_response, redirect
 from django.template import loader
 from django.urls import reverse
 from django.utils import encoding
@@ -23,14 +25,140 @@ def index(request):
     return HttpResponse("hello" + url)
 
 
+def index_one(request):
+    """访问重定向到 index_two"""
+    # url = reverse('index_two')
+    # return HttpResponseRedirect(url)
+    return redirect(index_two)
+    # return HttpResponse("index one")
+
+
+def index_two(request):
+    return HttpResponse("index two")
+
+
+"""请求对象"""
+
+
+def print_request(request):
+    print(request)
+    """得到ip"""
+    ip = request.META['REMOTE_ADDR']
+    print(ip)
+    """用户的浏览器信息"""
+    user_agent = request.META['HTTP_USER_AGENT']
+    print(user_agent)
+
+    return HttpResponse()
+
+
+"""响应对象"""
+
+
+def print_resp(request):
+    # 使用render
+    now = datetime.now()
+    html = render_to_response('index.html', {
+        'now': now
+    })
+    return HttpResponse(html, content_type='text/plain')
+
+
+def print_json(request):
+    user_info = {
+        'username': "杨华钟",
+        'age': 22
+    }
+    # import json
+    # user_info = json.dumps(user_info)
+    # return HttpResponse(user_info,content_type='application/json')
+    return JsonResponse(user_info)
+
+
+"""打印响应对象"""
+
+
+def attr(request):
+    resp = HttpResponse("打印响应对象", status=404)
+    """重写设置http的状态码"""
+    # resp.status_code=204
+    """打印http状态码"""
+    resp.write('2020')
+    # print(resp.status_code)
+    return resp
+
+
+# 可以实现导出excel
+def print_image(request):
+    try:
+        file_name = os.path.join(BASE_DIR, 'static\\长江大学期末考试安排.xlsx')
+        response = FileResponse(open(file_name, 'rb'))
+    except Exception as e:
+        print(e)
+    return HttpResponse(response, content_type='application/vnd.openxmlformats-officedocument.spreadsheetml.sheet')
+
+
 """"获取url中的参数"""
+from django.views.generic.base import TemplateView
+
+"""渲染图片、文字"""
+
+
+def temp_image(request):
+    img_url = '/medias/images/background.jpg'
+    user_info = {
+        'username': '杨华钟',
+        'age': 22
+    }
+
+    list_city = ['长沙', '北京', '武汉']
+    list_prod = [
+        {'name': "名称1", 'price': 100, },
+        {'name': "名称2", 'price': 200, },
+        {'name': "名称3", 'price': 300, },
+        {'name': "名称4", 'price': 400, },
+    ]
+    bool = True
+    return render(request, 'car.html', {
+        'img_url': img_url,
+        'user_info': user_info,
+        'list_city': list_city,
+        'list_prod': list_prod,
+        'bool': bool
+
+    })
+
+
+def temp_tag(request):
+    """模板标签的使用"""
+    list_city = ['长沙', '北京', '武汉']
+    list_prod = [
+        {'name': "名称1", 'price': 100, },
+        {'name': "名称2", 'price': 200, },
+        {'name': "名称3", 'price': 300, },
+        {'name': "名称4", 'price': 400, },
+    ]
+    user_info = {
+        'username': '杨华钟',
+        'age': 22
+    }
+    list_order = []
+    return render(request, 'tag.html', {
+        'list_city': list_city,
+        'list_prod': list_prod,
+        'list_order': list_order,
+        'user_info':user_info
+    })
 
 
 def article(request, year):
-    print('year:{0}'.format(year))
+    # print('year:{0}'.format(year))
     # 用get获取月份前端url传过来参数
     month = request.GET.get('month', None)
-    print('month:{0}'.format(month))
+    # 产生500
+    # raise ValueError
+    raise PermissionDenied
+    # print('month:{0}'.format(month))
     return HttpResponse("article:" + year)
 
 
@@ -76,3 +204,13 @@ def now_use_file(request):
     return render_to_response('index.html', {
         'now': now
     })
+
+
+def page_500(request):
+    """重写500响应页面"""
+    return render_to_response('500.html')
+
+
+def page_404(request, exception):
+    """重写404响应页面"""
+    return render(request, '404.html')

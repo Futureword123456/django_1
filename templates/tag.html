@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>tag</title>
+    <style type="text/css">
+        .row1{
+            color: coral;
+            background-color: cyan;
+        }.row2{
+            color: cornflowerblue;
+            background-color: crimson;
+                 }
+        .row3{
+            color: darkgray;
+            background-color: darkorange;
+        }
+    </style>
+</head>
+<body>
+  {# 老板不是人 #}
+<!-- 千万不让；老板看到-->
+  <h3>城市标签</h3>
+<ul>
+    {% for items in list_city  %}
+    <li>
+        城市:{{ items }}
+    </li>
+    {% endfor %}
+</ul>
+ <h3>商品标签</h3>
+<ul>
+    {% for items in list_prod reversed %}
+        {% if items.price > 50 %}
+           <li class="{% cycle 'row1' 'row2' 'row3' %}">
+           {{ forloop.counter }}:
+                 商品:{{ items  }}
+           </li>
+        {% endif %}
+    {% endfor %}
+</ul>
+<h4>
+    订单渲染
+</h4>
+<ul>
+    {% for item in list_order %}
+        <li>{{ item }}</li>
+    {% empty %}
+        <li>订单没有</li>
+    {% endfor %}
+
+
+</ul>
+<h5>渲染对象</h5>
+{% for key,value in user_info.items  %}
+    <p>{{ key }}:{{ value }}</p>
+
+{% endfor %}
+  {# 根据name跳转 #}
+<h5>url使用</h5>
+        <a href="{% url 'print_attr' %}" target="_blank">打印响应对象</a>
+{# 带参数的url #}
+        <a href="{% url 'article_detail' 2020 %}?month=12 ">2020年的文字</a>
+{# 命名空间 #}
+        <a href="{% url 'auth:temp_show' %}"> 命名空间</a>
+{# 显示当前时间 #}
+        当前时间:{% now 'JS F Y H:i' %}
+</body>
+</html>

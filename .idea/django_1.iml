@@ -23,7 +23,10 @@
     <option name="TEMPLATE_CONFIGURATION" value="Django" />
     <option name="TEMPLATE_FOLDERS">
       <list>
-        <option value="$MODULE_DIR$/../django_1\templates" />
+        <option value="$MODULE_DIR$/templates" />
+        <option value="$MODULE_DIR$/jinja2" />
+        <option value="$MODULE_DIR$/oauth/templates" />
+        <option value="$MODULE_DIR$/oauth/jinja2" />
       </list>
     </option>
   </component>

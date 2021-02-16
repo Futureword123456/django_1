@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+<ul>
+    <li>
+        用户名:{{ user_info.username }}
+    </li>
+     <li>
+        年龄:{{ user_info.age }}
+    </li>
+</ul>
+城市:{{ list_city.0 }}
+城市:{{ list_city.1}}
+城市:{{ list_city.2 }}
+{#  <ul>#}
+{#      <li>#}
+{#          商品:{{ list_prod.0.name }}:{{ list_prod.0.price }}#}
+{#      </li>#}
+{#       <li>#}
+{#          商品:{{ list_prod.1.name }}:{{ list_prod.1.price }}#}
+{#      </li>#}
+{#       <li>#}
+{#          商品:{{ list_prod.2.name }}:{{ list_prod.2.price }}#}
+{#      </li>#}
+{#       <li>#}
+{#          商品:{{ list_prod.3.name }}:{{ list_prod.3.price }}#}
+{#      </li>#}
+{#  </ul>#}
+{% for item in list_prod  %}
+    <li>
+    商品:{{ item.name }}
+    </li>
+
+
+{% endfor %}
+
+<p>{{ bool }}</p>
+ <img src="{{ img_url }}" alt="车" >
+</body>
+</html>
