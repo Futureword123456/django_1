@@ -6,6 +6,7 @@
 import os
 from datetime import datetime
 
+
 from django.core.exceptions import PermissionDenied
 from django.http import HttpResponse, HttpResponseRedirect, JsonResponse, FileResponse
 from django.shortcuts import render, render_to_response, redirect
@@ -98,6 +99,32 @@ def print_image(request):
     return HttpResponse(response, content_type='application/vnd.openxmlformats-officedocument.spreadsheetml.sheet')
 
 
+def print_filter(request):
+    """模板过滤器的使用"""
+    list_word = [
+        'view',
+        'model',
+    ]
+    now = datetime.now()
+    user_info={
+        'username':"李四",
+        'age':None,
+        'sex': False
+    }
+    import math
+    pi=math.pi
+    html = '<h1>主标题</h1><script >alert("55555")</script>'
+    str1 = "<h1>我是主标题</h1>"
+    return render(request, 'filter.html', {
+        'list_word': list_word,
+        'now':now,
+        'user_info':user_info,
+        'pi':pi,
+        'str1':str1,
+        'html':html
+    })
+
+
 """"获取url中的参数"""
 from django.views.generic.base import TemplateView
 
@@ -147,7 +174,7 @@ def temp_tag(request):
         'list_city': list_city,
         'list_prod': list_prod,
         'list_order': list_order,
-        'user_info':user_info
+        'user_info': user_info
     })
 
 

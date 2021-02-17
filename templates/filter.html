@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>过滤器的使用</title>
+</head>
+<body>
+  <h4>首字母大写</h4>
+  <ol>
+     {% for item in list_word %}
+        <li>{{ item|upper }}</li>
+     {% endfor %}
+  </ol>
+  <ul>
+      <li>{{ now|date:"Y-m-d H:i:s" }}</li>
+  </ul>
+  <h5>默认值的显示</h5>
+用户名:{{ user_info.username }}<br>
+年龄:{{ user_info.age|default_if_none:"未知" }}<br>
+性别:{{ user_info.sex|default:"不详" }}
+<h5>数字的四舍五入</h5>
+{{ pi|floatformat:4 }}
+<h5>富文本的展示</h5>
+{{ html }}<br>
+
+{{ str1|truncatechars:8|safe }}
+
+</body>
+</html>

@@ -1,0 +1,27 @@
+{% load oauth_extras %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>自定义过滤器</title>
+    <style type="text/css">
+        .text-red{
+            color: crimson;
+        }
+    </style>
+</head>
+<body>
+<ol>
+    {% for city in list_city %}
+    <li>{{ city|waring|safe }}</li>
+    {% endfor %}
+</ol>
+
+<ul>
+    <li>
+        {{ price|accounting_format:5 }}
+    </li>
+</ul>
+
+</body>
+</html>

@@ -9,8 +9,7 @@ from oauth import views
 app_name = 'oauth'
 urlpatterns = [
     # url(r'^index/$', views.index, name='index'),
-
     url(r'^temp/show/$',views.temp_show,name='temp_show'),
-
+    url(r'^temp/filter/mine$', views.temp_filter, name='temp_filter'),
     url(r'^show/class/$',views.ShowClassView.as_view(),name='show_class'),
 ]

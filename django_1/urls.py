@@ -40,7 +40,8 @@ urlpatterns = [
     url(r'^time/$', views.now_time),
     # 打印图片
     url(r'^print/image/$',views.print_image,name='print_image'),
-    # 使用类改写视图
+    # 模板过滤器的使用
+    url(r'^print/filter/$',views.print_filter,name='print_filter'),
 
     # 模板引擎选择
     # url(r'^temp/show/',views.temp_show,name='temp_show'),
