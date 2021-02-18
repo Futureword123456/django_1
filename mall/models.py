@@ -22,7 +22,6 @@ class Collection(models.Model):
     content_type = models.ForeignKey(ContentType,on_delete=models.CASCADE)
     object_id = models.IntegerField('关联的ID')
     content_object = GenericForeignKey('content_type','object_id')
-
     create_at = models.DateTimeField('收藏时间',auto_now_add=True)
 
 
