@@ -73,7 +73,7 @@ class UserDetail(models.Model):
 
 
 class UserAddress(CommonUtils):
-    """用户地址"""
+    """用户地址 一对多的情况"""
     user = models.ForeignKey(Student, verbose_name='学生',on_delete=models.CASCADE)
     phone = models.CharField('收件人电话', max_length=11)
     address = models.CharField('收件人地址', max_length=64)
@@ -94,3 +94,4 @@ class ProxyStudent(Student):
     def get_name(self):
         """获取学生姓"""
         return self.name[0]
+
