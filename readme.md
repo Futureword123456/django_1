@@ -13,3 +13,15 @@ IntegerField、SmallIntegerField 整数
 FloatField、DecimalField 小数
 auto_now 更新时间为记录更改的时间
 auto_now_add记录创建时间
+
+
+
+模型的元数据
+使用Mata类来表示
+    class Meta:
+        """修改数据库的名称"""
+        db_table = 'students'
+        ordering = ['-updated_at']
+        
+ 外键关联
+ 
