@@ -25,3 +25,14 @@ auto_now_add记录创建时间
         
  外键关联
  
+ 
+ django的增删改查
+ 1、使用模型的save()保存数据
+ user_obj = User(username = 'admin',password = 'password)
+ user_obj.save()
+ 2、使用模型的create()新增加的数据
+ user_obj = User.objects.create(username='admin',password = 'password')
+ user_obj.pk
+3、使用get()查询单条数据
+User.objects.get(pk=1)
+user_obj.id

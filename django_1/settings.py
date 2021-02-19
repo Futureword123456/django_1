@@ -37,6 +37,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'oauth.apps.OauthConfig',
     'mall.apps.MallConfig',
+    'weibo.apps.WeiboConfig',
 
 ]
 
