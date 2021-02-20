@@ -4,12 +4,23 @@ from django.db import models
 # Create your models here.
 
 class WeiboUser(models.Model):
+    """ 微博用户 """
+    USER_STATUS = (
+        (2, '限制用户'),
+        (1, '正常'),
+        (0, '删除'),
+    )
     username = models.CharField('用户名', max_length=64)
     password = models.CharField('密码', max_length=256)
     nickname = models.CharField('昵称', max_length=64)
+    status = models.SmallIntegerField('用户状态', choices=USER_STATUS, default=1)
 
     class Meta:
         db_table = "weibo_user"
+        ordering = ['id']
+
+    def __str__(self):
+        return 'User;{},pk:{},status:{},nickname:{}'.format(self.username, self.pk, self.status, self.nickname)
 
 
 class Weibo(models.Model):
@@ -25,7 +36,7 @@ class Weibo(models.Model):
 
 class WeiboImage(models.Model):
     """微博图片"""
-    weibo = models.ForeignKey(Weibo,on_delete=models.CASCADE)
+    weibo = models.ForeignKey(Weibo, on_delete=models.CASCADE)
     image = models.ImageField(upload_to='weibo', verbose_name='图片')
 
     class Meta:
@@ -34,10 +45,10 @@ class WeiboImage(models.Model):
 
 class Comment(models.Model):
     """微博的评论"""
-    content = models.CharField('评论内容',max_length=256)
+    content = models.CharField('评论内容', max_length=256)
     create_at = models.DateTimeField('评论时间', auto_now_add=True)
-    user = models.ForeignKey(WeiboUser, verbose_name='评论的用户',on_delete=models.CASCADE)
-    weibo = models.ForeignKey(Weibo,verbose_name='关联的微博',on_delete=models.CASCADE)
+    user = models.ForeignKey(WeiboUser, verbose_name='评论的用户', on_delete=models.CASCADE)
+    weibo = models.ForeignKey(Weibo, verbose_name='关联的微博', on_delete=models.CASCADE)
 
     class Meta:
         db_table = 'weibo_comments'
@@ -45,8 +56,8 @@ class Comment(models.Model):
 
 class Friend(models.Model):
     """好友关系"""
-    user_from = models.ForeignKey(WeiboUser, verbose_name='关注人', related_name='user_from',on_delete=models.CASCADE)
-    user_to = models.ForeignKey(WeiboUser, verbose_name='被关注人', related_name='user_to',on_delete=models.CASCADE)
+    user_from = models.ForeignKey(WeiboUser, verbose_name='关注人', related_name='user_from', on_delete=models.CASCADE)
+    user_to = models.ForeignKey(WeiboUser, verbose_name='被关注人', related_name='user_to', on_delete=models.CASCADE)
     created_at = models.DateTimeField('关注时间', auto_now_add=True)
 
     class Meta:

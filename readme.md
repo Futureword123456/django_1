@@ -59,8 +59,7 @@ User.objects.all().delete()
 2.Page常用属性和方法：
 （1）has_next:是否还有下一页。
 （2）has_previous:是否还有上一页。
-（3）next_page_number: 下一
-页的页码。
+（3）next_page_number: 下一页的页码。
 （4）previous_page_number:上一页的页码：
 （5）number：当前页。
 （6）start_index: 当前这一页的第一条数据的索引值。
