@@ -45,3 +45,8 @@ user_obj
 user_obj = User.objects.all().update(*args,**kwargs)
 
 使用delete()删除数据
+删除单条数据
+user_obj = User.objects.get(pk=1)
+user_obj.delete()
+删除多条记录
+User.objects.all().delete()
