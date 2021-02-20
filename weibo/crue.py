@@ -69,7 +69,7 @@ from weibo.models import WeiboUser as User
 # for i in range(100):
 #     user = User(username='user{0}'.format(i),password='pass{0}'.format(i),nickname='nick{0}'.format(i))
 #     User.objects.bulk_create([user])
-"""分页"""
+"""分页（查询后再分片）"""
 user_list = User.objects.all()[80:90]
 print(len(user_list))
 for i in user_list:
