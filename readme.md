@@ -36,3 +36,6 @@ auto_now_add记录创建时间
 3、使用get()查询单条数据
 User.objects.get(pk=1)
 user_obj.id
+使用模型的all()查询所有的数据
+User.objects.all()
+user_obj
