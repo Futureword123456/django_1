@@ -65,4 +65,4 @@ urlpatterns = [
 urlpatterns += [url(r'^medias/(?P<path>.*)$', serve, {
     'document_root': settings.MEDIAS_ROOT,
 
-}), ]
+}),]
