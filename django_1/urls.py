@@ -58,7 +58,8 @@ urlpatterns = [
     url(r'^auth/', include('oauth.urls', namespace='auth')),
     # 从html加载
     url(r'^now/$', views.now_use_file),
-
+    # 微博模块
+    url(r'^weibo/', include('weibo.urls', namespace='weibo')),
 ]
 """添加自定义的静态资源"""
 urlpatterns += [url(r'^medias/(?P<path>.*)$', serve, {
