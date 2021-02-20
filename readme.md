@@ -50,3 +50,18 @@ user_obj = User.objects.get(pk=1)
 user_obj.delete()
 删除多条记录
 User.objects.all().delete()
+
+
+1.Paginator常用属性和方法：
+（1）count:总共有多少条数据。
+（2）num_pages:总共有多少页
+（3）page_range:页面的区间。比如有三页，那么就是range(1,4)。
+2.Page常用属性和方法：
+（1）has_next:是否还有下一页。
+（2）has_previous:是否还有上一页。
+（3）next_page_number: 下一
+页的页码。
+（4）previous_page_number:上一页的页码：
+（5）number：当前页。
+（6）start_index: 当前这一页的第一条数据的索引值。
+（7）end_index:当前这一页的最后一条数据的索引值。
