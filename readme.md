@@ -39,3 +39,9 @@ user_obj.id
 使用模型的all()查询所有的数据
 User.objects.all()
 user_obj
+
+使用save()修改数据
+使用update()批量修改数据
+user_obj = User.objects.all().update(*args,**kwargs)
+
+使用delete()删除数据
