@@ -38,11 +38,11 @@ from weibo.models import WeiboUser as User
 #
 # obj1 = User.objects.get_or_create(username='杨',password='aa123',nickname='世界')
 #
-# user1 = User(username='user1',password=123,nickname='yan1')
-# user2 = User(username='user2',password=123,nickname='yan2')
-# user3 = User(username='user3',password=123,nickname='yan3')
+# user1 = User(username='user1', password=123, nickname='yan1')
+# user2 = User(username='user2', password=123, nickname='yan2')
+# user3 = User(username='user3', password=123, nickname='yan3')
 # """插入多条数据"""
-# User.objects.bulk_create([user1,user2,user3])
+# User.objects.bulk_create([user1, user2, user3])
 """返回第一条/最后一条"""
 # print(User.objects.first())
 # print(User.objects.last())
@@ -51,9 +51,26 @@ from weibo.models import WeiboUser as User
 """结果集是否存在,存在则返回True,不存在则返回False"""
 # print(User.objects.exists())
 """修改记录"""
-user_obj = User.objects.get(pk=18)
+# user_obj = User.objects.get(pk=18)
+#
+# user_obj.password = 'aaa'
+# user_obj.save()
+"""排除一些情况"""
+# user = User.objects.all().exclude(username='杨华钟').count()
+# print(user)
 
-user_obj.password = 'aaa'
-user_obj.save()
+# print(User.objects.all().order_by('-id')[1].username)
+# print(User.objects.using('students'))
+"""筛选出满足条件的记录"""
+# print(User.objects.all().filter(username='杨华钟'))
 
 
+# list1 = []
+# for i in range(100):
+#     user = User(username='user{0}'.format(i),password='pass{0}'.format(i),nickname='nick{0}'.format(i))
+#     User.objects.bulk_create([user])
+"""分页"""
+user_list = User.objects.all()[80:90]
+print(len(user_list))
+for i in user_list:
+    print(i.username)
