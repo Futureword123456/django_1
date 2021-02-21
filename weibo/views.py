@@ -1,3 +1,5 @@
+from datetime import datetime
+
 from django.core.paginator import Paginator, PageNotAnInteger, EmptyPage
 from django.http import HttpResponse
 from django.shortcuts import render
@@ -59,10 +61,22 @@ def page_sarch(request):
     # """查询用户状态大于等于四的结果"""
     # user_list = User.objects.filter(status__gte=4)
     # print(user_list)
+    # 是否为空值的查询 isnull
+    user_list = User.objects.filter(create_at__isnull=True)
+    print(user_list.count())
     """查询空字符串"""
-    try:
-        user_list = User.objects.filter(remark__exact='')
-        print(user_list.count())
-    except Exception as e:
-        print("字段不存在")
+    # try:
+    #     user_list = User.objects.filter(remark__exact='')
+    #     print(user_list.count())
+    # except Exception as e:
+    #     print("字段不存在")
+    """查询是今天创建的用户"""
+    date = datetime.now().date()
+    print(date)
+    user_list = User.objects.filter(create_at__date=date)
+    print(user_list)
+    """查询二月份创建的用户"""
+    user_list = User.objects.filter(create_at__month=date.month)
+    print(user_list)
+
     return HttpResponse('ok')
