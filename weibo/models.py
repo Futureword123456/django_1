@@ -15,6 +15,7 @@ class WeiboUser(models.Model):
     nickname = models.CharField('昵称', max_length=64)
     status = models.SmallIntegerField('用户状态', choices=USER_STATUS, default=1)
 
+
     class Meta:
         db_table = "weibo_user"
         ordering = ['id']

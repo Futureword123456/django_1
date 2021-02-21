@@ -11,4 +11,6 @@ app_name = 'weibo'
 urlpatterns = [
     # 对用户数据进行分页
     url(r'^user/(?P<page>\S+)/$', views.Page_User, name='Page_User'),
+    # orm查询练习
+    url(r'^search/$', views.page_sarch, name='page_sarch'),
 ]

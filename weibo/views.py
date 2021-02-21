@@ -22,7 +22,7 @@ def Page_User(request, page):
     try:
         """获取某一页的数据"""
         page_data = p.get_page(page)
-        print('数据列表',page_data.object_list)
+        print('数据列表', page_data.object_list)
         print('是否还有下一页', page_data.has_next())
         print('是否还有上一页', page_data.has_previous())
         print('下一页的页码', page_data.next_page_number())
@@ -34,4 +34,35 @@ def Page_User(request, page):
         print('页码错误')
     except EmptyPage as e:
         print('没有数据了')
+
+    return HttpResponse('ok')
+
+
+def page_sarch(request):
+    """查询条件练习"""
+    # user10 = User.objects.filter(username='user10')
+    # print(user10)
+    # """区分大小写"""
+    # user = User.objects.filter(nickname__contains='user10')
+    # print(user)
+    # """查询昵称姓ni的用户"""
+    # ni = User.objects.filter(nickname__startswith='ni')
+    # print(ni)
+    """查询以小二结束的用户"""
+    # user_list = User.objects.filter(nickname__endswith='长江大学')
+    # print(user_list)
+    # """用户多个状态的查询in"""
+    # user_list = User.objects.filter(status__in=(4, 5))
+    # print(user_list)
+    # """查询用户状态大于四的结果"""
+    # user_list = User.objects.filter(status__gt=4)
+    # """查询用户状态大于等于四的结果"""
+    # user_list = User.objects.filter(status__gte=4)
+    # print(user_list)
+    """查询空字符串"""
+    try:
+        user_list = User.objects.filter(remark__exact='')
+        print(user_list.count())
+    except Exception as e:
+        print("字段不存在")
     return HttpResponse('ok')
