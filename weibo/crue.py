@@ -4,7 +4,7 @@
 # @Email : 2635681517@qq.com
 # @File : crue.py
 
-from weibo.models import WeiboUser as User
+from weibo.models import WeiboUser as User, Weibo, Comment
 
 """新增数据"""
 # user_obj = User(username='杨华钟', password='123456', nickname='无限可能')
@@ -65,12 +65,19 @@ from weibo.models import WeiboUser as User
 # print(User.objects.all().filter(username='杨华钟'))
 
 
-list1 = []
-for i in range(100):
-    user = User(username='user{0}'.format(i),password='pass{0}'.format(i),nickname='用户{0}'.format(i),status='2',remark='长江大学{}'.format(i))
-    User.objects.bulk_create([user])
+# list1 = [] for i in range(100): user = User(username='user{0}'.format(i),password='pass{0}'.format(i),nickname='用户{
+# 0}'.format(i),status='2',remark='长江大学{}'.format(i)) User.objects.bulk_create([user])
 """分页（查询后再分片）"""
 # user_list = User.objects.all()[80:90]
 # print(len(user_list))
 # for i in user_list:
 #     print(i.username)
+
+
+user_list = User.objects.get(username='user11')
+print(user_list)
+
+weibo = Weibo.objects.create(user=user_list,content='长江大学')
+# print(weibo.id)
+comment = Comment.objects.create(user=user_list,weibo=weibo,content="内容1")
+comment1 = Comment.objects.create(user=user_list,weibo=weibo,content="内容2")

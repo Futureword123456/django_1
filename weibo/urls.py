@@ -13,4 +13,11 @@ urlpatterns = [
     url(r'^user/(?P<page>\S+)/$', views.Page_User, name='Page_User'),
     # orm查询练习
     url(r'^search/$', views.page_sarch, name='page_sarch'),
+    # 事务练习
+    url(r'^trans/$', views.trans, name='trans'),
+    #
+    url(r'^trans_with/$', views.trans_with, name='trans_with'),
+    #手动控制事务
+    url(r'^trans_hand/$', views.trans_hand, name='trans_hand'),
+
 ]

@@ -1,10 +1,11 @@
 from datetime import datetime
 
 from django.core.paginator import Paginator, PageNotAnInteger, EmptyPage
+from django.db import transaction
 from django.http import HttpResponse
 from django.shortcuts import render
 
-from weibo.models import WeiboUser as User
+from weibo.models import WeiboUser as User, Comment, Weibo
 
 
 # Create your views here.
@@ -62,8 +63,8 @@ def page_sarch(request):
     # user_list = User.objects.filter(status__gte=4)
     # print(user_list)
     # 是否为空值的查询 isnull
-    user_list = User.objects.filter(create_at__isnull=True)
-    print(user_list.count())
+    # user_list = User.objects.filter(create_at__isnull=True)
+    # print(user_list.count())
     """查询空字符串"""
     # try:
     #     user_list = User.objects.filter(remark__exact='')
@@ -76,7 +77,58 @@ def page_sarch(request):
     user_list = User.objects.filter(create_at__date=date)
     print(user_list)
     """查询二月份创建的用户"""
-    user_list = User.objects.filter(create_at__month=date.month)
+    user_list = User.objects.filter(create_at__month='3')
     print(user_list)
+    """查询记录"""
+    comment_list = Comment.objects.filter(user__username__contains='user11')
+    for item in comment_list:
+        print(item.user.username)
+    return HttpResponse('ok')
 
+
+@transaction.atomic()
+def trans(request):
+    """事务练习
+    用户发布新闻时顺便发布一条评论，不能失败
+    """
+    user = User.objects.get(pk=40605)
+    """发布微博"""
+    weibo = Weibo.objects.create(user=user, content='发布长江大学1')
+    """发布评论"""
+    comment = Comment.objects.create(user=user, content='微博评论', weibo=weibo)
+    print('weibo', weibo.pk, 'comment:', comment.id)
+    return HttpResponse('ok')
+
+
+def trans_with(request):
+    """事务练习
+       用户发布新闻时顺便发布一条评论，不能失败
+       """
+    with transaction.atomic():
+        user = User.objects.get(pk=40605)
+        """发布微博"""
+        weibo = Weibo.objects.create(user=user, content='发布长江大学1')
+        """发布评论"""
+        comment = Comment.objects.create(user=user, content='微博评论', weibo=weibo)
+        print('weibo', weibo.pk, 'comment:', comment.id)
+    return HttpResponse("ok")
+
+
+def trans_hand(request):
+    """手动控制事务"""
+    user = User.objects.get(pk=40605)
+    """发布微博"""
+    try:
+        """放弃自动提交"""
+        transaction.set_autocommit(False)
+        weibo = Weibo.objects.create(user=user, content='hand2')
+        """发布评论"""
+        comment = Comment.objects.create(user=user, content='微博评论2', weibo=weibo)
+        transaction.commit()
+        print('weibo', weibo.pk, 'comment:', comment.id)
+
+    except:
+        """不使用事务手动删除"""
+        # weibo.delete()
+        transaction.rollback()
     return HttpResponse('ok')
