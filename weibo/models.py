@@ -14,10 +14,9 @@ class WeiboUser(models.Model):
     password = models.CharField('密码', max_length=256)
     nickname = models.CharField('昵称', max_length=64)
     status = models.SmallIntegerField('用户状态', choices=USER_STATUS, default=1)
-    create_at = models.DateTimeField('创建时间', null=True,blank=True)
-    updated_at = models.DateTimeField('最后修改时间',null=True,blank=True)
-    content = models.CharField('内容',max_length=256)
-
+    create_at = models.DateTimeField('创建时间', null=True, blank=True)
+    updated_at = models.DateTimeField('最后修改时间', null=True, blank=True)
+    content = models.CharField('内容', max_length=256)
 
     class Meta:
         db_table = "weibo_user"

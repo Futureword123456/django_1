@@ -17,6 +17,13 @@
             </Attribute>
           </value>
         </entry>
+        <entry key="\django_1\settings.py">
+          <value>
+            <Attribute>
+              <option name="separator" value="," />
+            </Attribute>
+          </value>
+        </entry>
         <entry key="\oauth\models.py">
           <value>
             <Attribute>

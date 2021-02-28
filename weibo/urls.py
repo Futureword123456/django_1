@@ -7,6 +7,7 @@
 from django.conf.urls import url
 
 from weibo import views
+
 app_name = 'weibo'
 urlpatterns = [
     # 对用户数据进行分页
@@ -17,7 +18,7 @@ urlpatterns = [
     url(r'^trans/$', views.trans, name='trans'),
     #
     url(r'^trans_with/$', views.trans_with, name='trans_with'),
-    #手动控制事务
+    # 手动控制事务
     url(r'^trans_hand/$', views.trans_hand, name='trans_hand'),
 
 ]
