@@ -107,11 +107,11 @@ def trans_with(request):
     with transaction.atomic():
         user = User.objects.get(pk=40605)
         """发布微博"""
-        weibo = Weibo.objects.create(user=user, content='发布长江大学1')
+        weibo = Weibo.objects.create(user=user, content='发布长江大学11111')
         """发布评论"""
-        comment = Comment.objects.create(user=user, content='微博评论', weibo=weibo)
+        comment = Comment.objects.create(user=user, content='微博评论222222', weibo=weibo)
         print('weibo', weibo.pk, 'comment:', comment.id)
-    return HttpResponse("ok")
+    return HttpResponse("ok1")
 
 
 def trans_hand(request):
