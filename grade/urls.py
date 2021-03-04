@@ -5,7 +5,7 @@
 # @File : urls.py
 
 from django.conf.urls import url
-
+app_name = 'grade'
 from grade import views
 
 urlpatterns = [
