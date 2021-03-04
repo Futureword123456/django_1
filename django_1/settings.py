@@ -38,6 +38,7 @@ INSTALLED_APPS = [
     'oauth.apps.OauthConfig',
     'mall.apps.MallConfig',
     'weibo.apps.WeiboConfig',
+    'grade.apps.GradeConfig',
 
 ]
 
