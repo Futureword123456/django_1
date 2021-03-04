@@ -29,6 +29,7 @@ urlpatterns = [
     # 重定向
     # 学生成绩
     url(r'^grade/', include('grade.urls', namespace='grade')),
+
     url(r'^index/one/$', views.index_one, name='index_one'),
     url(r'^index/two2$', views.index_two, name='index_two'),
     # 打印请求对象

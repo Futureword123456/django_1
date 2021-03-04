@@ -24,6 +24,13 @@
             </Attribute>
           </value>
         </entry>
+        <entry key="\grade\crud.py">
+          <value>
+            <Attribute>
+              <option name="separator" value=":" />
+            </Attribute>
+          </value>
+        </entry>
         <entry key="\oauth\models.py">
           <value>
             <Attribute>

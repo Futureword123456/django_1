@@ -17,7 +17,6 @@ class Grade(models.Model):
     student = models.ForeignKey(Student, null=True, related_name='stu_grade', on_delete=models.CASCADE)
     subject_name = models.CharField('科目', max_length=32)
     score = models.FloatField('分数', default=0)
-    sort = models.IntegerField('排名',default=1)
 
     year = models.SmallIntegerField('年份')
 
