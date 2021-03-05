@@ -152,8 +152,8 @@ def page_q(request):
     # for i in user_list_q:
     #     print('user:{0},status:{1},nickname:{2}'.format(i.username,i.status,i.nickname))
     # 从url中获取多个数据进行查询
-    # username中获取数据
-    username = request.GET.get('usernmae', None)
+    # username中获取数据,用get获得数据
+    username = request.GET.get('username', None)
     query = Q()
     if username is not None:
         query = query & Q(username=username)

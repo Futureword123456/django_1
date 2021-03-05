@@ -59,6 +59,13 @@
             </Attribute>
           </value>
         </entry>
+        <entry key="\weibo\test_f.py">
+          <value>
+            <Attribute>
+              <option name="separator" value=":" />
+            </Attribute>
+          </value>
+        </entry>
         <entry key="\weibo\views.py">
           <value>
             <Attribute>
