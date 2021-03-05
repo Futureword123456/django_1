@@ -193,7 +193,28 @@ def page_pure_sql(request):
     # 2 、根据链接获取游标
     cursor = connection.cursor()
     # 3、根据游标执行sql
-    rest = cursor.execute(sql,[username])
+    rest = cursor.execute(sql, [username])
+    # 4、获取查询结果
+    rows = cursor.fetchall()
+    for i in rows:
+        print(i)
+    return HttpResponse('ok')
+
+
+def page_paginator_sql(request):
+    """自定义sql分页器"""
+    # select `id`,`username`,`nickname` from `weibo_user`limit 10 offset 30
+    page = 1
+    page_size = 10
+    offset = (page-1)*page_size
+    sql = (
+        'select `id`,`username`,`nickname` from `weibo_user`limit %s offset %s'
+    )
+    # 1、获取数据库链接
+    # 2 、根据链接获取游标
+    cursor = connection.cursor()
+    # 3、根据游标执行sql
+    rest = cursor.execute(sql, [page_size,offset])
     # 4、获取查询结果
     rows = cursor.fetchall()
     for i in rows:
