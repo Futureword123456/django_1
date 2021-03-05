@@ -22,5 +22,10 @@ urlpatterns = [
     url(r'^trans_hand/$', views.trans_hand, name='trans_hand'),
     # q函数的使用
     url(r'^q/$', views.page_q, name='trans_hand'),
+    # sql使用
+    url(r'^sql/$', views.page_sql, name='page_sql'),
+
+
+    url(r'^pure/sql/$', views.page_pure_sql, name='page_pure_sql'),
 
 ]

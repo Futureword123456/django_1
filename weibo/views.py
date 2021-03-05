@@ -1,7 +1,7 @@
 from datetime import datetime
 
 from django.core.paginator import Paginator, PageNotAnInteger, EmptyPage
-from django.db import transaction
+from django.db import transaction, connection
 from django.db.models import Q
 from django.http import HttpResponse
 from django.shortcuts import render
@@ -164,4 +164,38 @@ def page_q(request):
     user_list_q2 = WeiboUser.objects.filter(query)
     print(user_list_q2.count())
     print(user_list_q2)
+    return HttpResponse('ok')
+
+
+def page_sql(request):
+    """使用sql查询"""
+    username = request.GET.get('username', '')
+    # 方式1 使用raw函数进行sql查询
+    sql = (
+        'select `id`,`username`,`nickname` from `weibo_user`'
+        ' where `username`=%s'
+    )
+    user_list = WeiboUser.objects.raw(sql, [username])
+    for item in user_list:
+        print(item.username)
+
+    return HttpResponse('ok')
+
+
+def page_pure_sql(request):
+    """使用chunsql查询"""
+    username = request.GET.get('username', '')
+    sql = (
+        'select `id`,`username`,`nickname` from `weibo_user`'
+        ' where `username`=%s'
+    )
+    # 1、获取数据库链接
+    # 2 、根据链接获取游标
+    cursor = connection.cursor()
+    # 3、根据游标执行sql
+    rest = cursor.execute(sql,[username])
+    # 4、获取查询结果
+    rows = cursor.fetchall()
+    for i in rows:
+        print(i)
     return HttpResponse('ok')
