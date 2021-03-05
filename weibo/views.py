@@ -2,10 +2,11 @@ from datetime import datetime
 
 from django.core.paginator import Paginator, PageNotAnInteger, EmptyPage
 from django.db import transaction
+from django.db.models import Q
 from django.http import HttpResponse
 from django.shortcuts import render
 
-from weibo.models import WeiboUser as User, Comment, Weibo
+from weibo.models import WeiboUser as User, Comment, Weibo, WeiboUser
 
 
 # Create your views here.
@@ -131,4 +132,36 @@ def trans_hand(request):
         """不使用事务手动删除"""
         # weibo.delete()
         transaction.rollback()
+    return HttpResponse('ok')
+
+
+"""q函数的使用"""
+
+
+def page_q(request):
+    """查询username和nick0的信息"""
+    # user_list = WeiboUser.objects.filter(username='user0')
+    # user_list2 = WeiboUser.objects.filter(nickname='user0')
+    # print(user_list)
+    # print(user_list2)
+    # or操作|
+    # 从url中获得参数
+    # name = request.GET.get('name',None)
+    # query = Q(username=name) | Q(nickname=name)
+    # user_list_q = WeiboUser.objects.filter(query)
+    # for i in user_list_q:
+    #     print('user:{0},status:{1},nickname:{2}'.format(i.username,i.status,i.nickname))
+    # 从url中获取多个数据进行查询
+    # username中获取数据
+    username = request.GET.get('usernmae', None)
+    query = Q()
+    if username is not None:
+        query = query & Q(username=username)
+    # nickname获取数据
+    nickname = request.GET.get('nickname', None)
+    if nickname is not None:
+        query = query & Q(nickname=nickname)
+    user_list_q2 = WeiboUser.objects.filter(query)
+    print(user_list_q2.count())
+    print(user_list_q2)
     return HttpResponse('ok')

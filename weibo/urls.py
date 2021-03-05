@@ -20,5 +20,7 @@ urlpatterns = [
     url(r'^trans_with/$', views.trans_with, name='trans_with'),
     # 手动控制事务
     url(r'^trans_hand/$', views.trans_hand, name='trans_hand'),
+    # q函数的使用
+    url(r'^q/$', views.page_q, name='trans_hand'),
 
 ]
