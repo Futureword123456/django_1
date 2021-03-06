@@ -25,7 +25,12 @@ SECRET_KEY = 'kpr2x9&be1!xk1foldxj7c((50d@ohd*s2)399_d@$tk2hz@74'
 DEBUG = True
 
 ALLOWED_HOSTS = ['*']
-
+INTERNAL_IPS = [
+    # ...
+    '127.0.0.1',
+    # ...
+]
+STATIC_URL = '/static/'
 # Application definition
 
 INSTALLED_APPS = [
@@ -39,10 +44,11 @@ INSTALLED_APPS = [
     'mall.apps.MallConfig',
     'weibo.apps.WeiboConfig',
     'grade.apps.GradeConfig',
+    'debug_toolbar',
 
 ]
-
 MIDDLEWARE = [
+    'debug_toolbar.middleware.DebugToolbarMiddleware',
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
@@ -50,6 +56,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+
 ]
 
 ROOT_URLCONF = 'django_1.urls'
@@ -134,7 +141,7 @@ USE_TZ = False
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/2.2/howto/static-files/
 
-STATIC_URL = '/static/'
+
 """配置静态文件的处理方式"""
 MEDIAS_URL = '/medias/'
 MEDIAS_ROOT = os.path.join(BASE_DIR, 'medias')

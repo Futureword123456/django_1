@@ -1,10 +1,12 @@
 from django.db import models
+from django.contrib.auth.models import User
 
 
 # Create your models here.
 class UserManager(models.Manager):
     def top_users(self):
-        return []
+        # 2、调用现有的方法
+        return self.all().order_by('-create_at'[:5])
 
 
 class WeiboUser(models.Model):
@@ -31,6 +33,20 @@ class WeiboUser(models.Model):
     def __str__(self):
         return 'User;{},pk:{},status:{},nickname:{}'.format(self.username, self.pk, self.status, self.nickname)
 
+
+"""添加代理
+"""
+
+
+# class MyUser(WeiboUser):
+#     """扩充功能"""
+#
+#     class Meta:
+#         proxy = True
+#
+#     def get_format_username(self):
+#         return self.username[:3] + '*****'
+#
 
 class Weibo(models.Model):
     """微博"""
