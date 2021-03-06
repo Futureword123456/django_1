@@ -6,6 +6,7 @@ from django.db.models import Q
 from django.http import HttpResponse
 from django.shortcuts import render
 
+from utils.sqlpage import SqlPaginator
 from weibo.models import WeiboUser as User, Comment, Weibo, WeiboUser
 
 
@@ -183,7 +184,7 @@ def page_sql(request):
 
 
 def page_pure_sql(request):
-    """使用chunsql查询"""
+    """使用sql查询"""
     username = request.GET.get('username', '')
     sql = (
         'select `id`,`username`,`nickname` from `weibo_user`'
@@ -194,6 +195,7 @@ def page_pure_sql(request):
     cursor = connection.cursor()
     # 3、根据游标执行sql
     rest = cursor.execute(sql, [username])
+    print(rest)
     # 4、获取查询结果
     rows = cursor.fetchall()
     for i in rows:
@@ -204,9 +206,12 @@ def page_pure_sql(request):
 def page_paginator_sql(request):
     """自定义sql分页器"""
     # select `id`,`username`,`nickname` from `weibo_user`limit 10 offset 30
-    page = 1
+    try:
+        page = int(request.GET.get('page', 1))
+    except:
+        return HttpResponse('no valid page')
     page_size = 10
-    offset = (page-1)*page_size
+    offset = (page - 1) * page_size
     sql = (
         'select `id`,`username`,`nickname` from `weibo_user`limit %s offset %s'
     )
@@ -214,9 +219,26 @@ def page_paginator_sql(request):
     # 2 、根据链接获取游标
     cursor = connection.cursor()
     # 3、根据游标执行sql
-    rest = cursor.execute(sql, [page_size,offset])
+    rest = cursor.execute(sql, [page_size, offset])
     # 4、获取查询结果
     rows = cursor.fetchall()
     for i in rows:
+        print(i)
+    return HttpResponse('ok')
+
+
+def page_paginator_sql2(request):
+    """自定义分页器"""
+    try:
+        page = int(request.GET.get('page', 1))
+    except:
+        return HttpResponse('no valid page')
+    sql = 'select `id`,`username`,`nickname` from `weibo_user` where `id`>%s'
+    sql_params = [5]
+    page_size = 10
+    paginator = SqlPaginator(sql, sql_params, page_size)
+
+    page_data = paginator.page(page)
+    for i in page_data:
         print(i)
     return HttpResponse('ok')
