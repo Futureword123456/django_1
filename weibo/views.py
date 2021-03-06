@@ -6,7 +6,7 @@ from django.db.models import Q
 from django.http import HttpResponse
 from django.shortcuts import render
 
-from utils.sqlpage import SqlPaginator
+from utils.sqlpage import SqlPaginator, PageNumError
 from weibo.models import WeiboUser as User, Comment, Weibo, WeiboUser
 
 
@@ -228,17 +228,30 @@ def page_paginator_sql(request):
 
 
 def page_paginator_sql2(request):
-    """自定义分页器"""
+    """ 自定义分页器的实现 """
     try:
-        page = int(request.GET.get('page', 1))
+        page = int(request.GET.get('page', 1))   # 表示页码，当前第几页
     except:
         return HttpResponse('no valid page')
-    sql = 'select `id`,`username`,`nickname` from `weibo_user` where `id`>%s'
-    sql_params = [5]
+    sql = (
+        'SELECT `id`, `username`, `nickname` FROM `weibo_user`'
+        'WHERE `id` > %s'
+    )
+    sql_params = [20]   # id大于5
     page_size = 10
-    paginator = SqlPaginator(sql, sql_params, page_size)
+    try:
+        paginator = SqlPaginator(sql, sql_params, page_size)
+        page_data = paginator.page(page)
+        for row in page_data:
+            print(row)
 
-    page_data = paginator.page(page)
-    for i in page_data:
-        print(i)
+        # 记录总数
+        count = paginator.count
+        print('总记录数：', count)
+
+        page_count = paginator.page_count
+        print('总页数：', page_count)
+    except PageNumError as e:
+        return HttpResponse('invalid page number')
+
     return HttpResponse('ok')
