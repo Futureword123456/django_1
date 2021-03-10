@@ -261,8 +261,11 @@ def page_paginator_sql2(request):
 def page_form_first(request):
     """第一个表单"""
     if request.method == 'POST':
+        """得到表单对象"""
         form = LoginForm(request.POST)
+        """验证表单是否有效"""
         if form.is_valid():
+            """获取表单数据"""
             data = form.cleaned_data
             print(data)
         else:
