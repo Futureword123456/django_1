@@ -64,3 +64,36 @@ User.objects.all().delete()
 （5）number：当前页。
 （6）start_index: 当前这一页的第一条数据的索引值。
 （7）end_index:当前这一页的最后一条数据的索引值。
+
+表单
+action---表单提交的url地址
+method---表单请求的方式
+enctype---请求内容形式
+textarea----多行文本
+text------单行文本
+password------密码
+email----邮箱
+url-----URL
+number-----数字
+color------颜色
+日期时间等(date,month,week,time,datetime,datetime-local)
+
+选择标签
+单选
+<input type ="radio">
+多选
+<input type ="checkbox">
+下拉选择
+<select><option></option></select>
+文件上传
+<input type="file">
+隐藏表单域
+<input type="hidden">
+按钮
+<input type="button">
+
+在视图中获取表单的值：
+GET请求
+request.GET.get('name',None)
+POST请求
+request.POST.get('name',None)

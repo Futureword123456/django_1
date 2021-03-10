@@ -45,6 +45,13 @@
             </Attribute>
           </value>
         </entry>
+        <entry key="\templates\test_form.html">
+          <value>
+            <Attribute>
+              <option name="separator" value=":" />
+            </Attribute>
+          </value>
+        </entry>
         <entry key="\weibo\crue.py">
           <value>
             <Attribute>

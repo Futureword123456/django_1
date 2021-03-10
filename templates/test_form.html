@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>表单练习</title>
+</head>
+<body>
+    <form action="http://imooc.com" method="post" enctype="multipart/form-data">
+        <ul>
+            <li>
+                用户地址:
+                <textarea name="" id="" cols="30" rows="10" placeholder="请输入地址"></textarea>
+            </li>
+            <li>
+                用户名:<input type="text" placeholder="用户名">
+            </li>
+            <li>
+                密码:<input type="password" placeholder="密码">
+            </li>
+            <li>
+                邮箱:<input type="email" placeholder="邮箱">
+            </li>
+            <li>
+                年龄:<input type="number" placeholder="年龄">
+            </li>
+            <li>
+                性别:
+                <label><input type="radio" value="男" name="sex">男</label>
+                 <label><input type="radio" value="女" name="sex">女</label>
+            </li>
+            <li>
+                爱好:
+                <label for="is_play_ball"><input type="checkbox" id="is_play_ball">打球</label>
+                <label for="is_play"><input type="checkbox" id="is_play">玩</label>
+            </li>
+            <li>
+                选择:
+                <label>
+                    <select>
+                        <option>长江大学1</option>
+                        <option>长江大学2</option>
+                        <option selected="selected">长江大学3</option>
+                        <option>长江大学4</option>
+                    </select>
+                </label>
+            </li>
+
+        </ul>
+
+    </form>
+</body>
+</html>
