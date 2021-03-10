@@ -97,3 +97,9 @@ GET请求
 request.GET.get('name',None)
 POST请求
 request.POST.get('name',None)
+django表单
+第一步 创建表单类
+
+第二部 添加到视图
+第三步 渲染到模板
+第四步 在视图中处理表单数据

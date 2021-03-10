@@ -30,5 +30,7 @@ urlpatterns = [
     # 自定义分页器
     url(r'^page/paginator/sql/$', views.page_paginator_sql, name='page_paginator_sql'),
     url(r'^page/paginator/sql2/$', views.page_paginator_sql2, name='page_paginator_sql2'),
+    # 表单的使用
+    url(r'^form/page_form/first$', views.page_form_first, name='page_form_first'),
 
 ]

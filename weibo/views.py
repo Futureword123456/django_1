@@ -7,6 +7,7 @@ from django.http import HttpResponse
 from django.shortcuts import render
 
 from utils.sqlpage import SqlPaginator, PageNumError
+from weibo.forms import LoginForm
 from weibo.models import WeiboUser as User, Comment, Weibo, WeiboUser
 
 
@@ -230,14 +231,14 @@ def page_paginator_sql(request):
 def page_paginator_sql2(request):
     """ 自定义分页器的实现 """
     try:
-        page = int(request.GET.get('page', 1))   # 表示页码，当前第几页
+        page = int(request.GET.get('page', 1))  # 表示页码，当前第几页
     except:
         return HttpResponse('no valid page')
     sql = (
         'SELECT `id`, `username`, `nickname` FROM `weibo_user`'
         'WHERE `id` > %s'
     )
-    sql_params = [20]   # id大于5
+    sql_params = [20]  # id大于5
     page_size = 10
     try:
         paginator = SqlPaginator(sql, sql_params, page_size)
@@ -255,3 +256,17 @@ def page_paginator_sql2(request):
         return HttpResponse('invalid page number')
 
     return HttpResponse('ok')
+
+
+def page_form_first(request):
+    """第一个表单"""
+    if request.method == 'POST':
+        form = LoginForm(request.POST)
+        if form.is_valid():
+            data = form.cleaned_data
+            print(data)
+        else:
+            form = LoginForm()
+    return render(request, 'page_form_first.html', {
+        'form': form
+    })

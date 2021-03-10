@@ -1,0 +1,13 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>第一个表单</title>
+</head>
+<body>
+<form action="{% url 'weibo:page_form_first'%}" method="post">
+    {{ form }}
+    <input type="submit" value="提交">
+</form>
+</body>
+</html>

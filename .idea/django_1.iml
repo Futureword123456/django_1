@@ -27,6 +27,7 @@
         <option value="$MODULE_DIR$/jinja2" />
         <option value="$MODULE_DIR$/oauth/templates" />
         <option value="$MODULE_DIR$/oauth/jinja2" />
+        <option value="$MODULE_DIR$/weibo/templates" />
       </list>
     </option>
   </component>
