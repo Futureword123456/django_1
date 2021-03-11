@@ -7,7 +7,7 @@ from django.http import HttpResponse
 from django.shortcuts import render
 
 from utils.sqlpage import SqlPaginator, PageNumError
-from weibo.forms import LoginForm
+from weibo.forms import LoginForm, UserLoginForm
 from weibo.models import WeiboUser as User, Comment, Weibo, WeiboUser
 
 
@@ -277,5 +277,13 @@ def page_form_first(request):
 
         print(form.is_bound)
     return render(request, 'page_form_first.html', {
+        'form': form
+    })
+
+
+def user_login(request):
+    """用户登录"""
+    form = UserLoginForm()
+    return render(request, 'user_login.html', {
         'form': form
     })

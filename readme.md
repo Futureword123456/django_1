@@ -139,7 +139,7 @@ initial ---初始化数据
 required默认是必填 
 label ----label标签(如:输入框前的文字描述)
 initial ---初始化数据
-wedget----定制界面显示的方式（如：文本框，选择框）
+widget----定制界面显示的方式（如：文本框，选择框）
 help_text--帮助文章
 error_messages---覆盖字段引发的异常错误显示
 localize ----本地化，根据用户所在地区进行格式化显示
@@ -158,7 +158,7 @@ FloatField---浮点数
 IntegerField---整数输入
 DecimalField---小数输入(更精确)
 选择
-ChioceField--单选
+ChoiceField--单选
 MultipleChoiceField---多选
 TypedChoiceField ---高级选择
 日期时间
@@ -175,3 +175,6 @@ BooleanField---True/False
 NullBooleanField---None/True/False
 正则
 RegexField---正则输入
+文本输入
+TextInput
+

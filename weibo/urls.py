@@ -32,5 +32,7 @@ urlpatterns = [
     url(r'^page/paginator/sql2/$', views.page_paginator_sql2, name='page_paginator_sql2'),
     # 表单的学习
     url(r'^form/page_form/first$', views.page_form_first, name='page_form_first'),
+    # 以后登录
+    url(r'^user/login$', views.user_login, name='user_login'),
 
 ]
