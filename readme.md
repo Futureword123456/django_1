@@ -145,3 +145,33 @@ error_messages---覆盖字段引发的异常错误显示
 localize ----本地化，根据用户所在地区进行格式化显示
 disabled---禁用表单，界面上不可以操作
 has_changed()---值是否发生了变化
+
+
+文本/字符串
+CharField---字符串输入
+EmailField---邮件地址输入
+URLField URL地址输入
+UUIDField uuid 字符串输入
+
+数值(整数，小数)
+FloatField---浮点数
+IntegerField---整数输入
+DecimalField---小数输入(更精确)
+选择
+ChioceField--单选
+MultipleChoiceField---多选
+TypedChoiceField ---高级选择
+日期时间
+DateField---日期选择
+DateTimeField----日期时间选择
+DurationField---时间片段timedelta
+TimeField---时间选择
+文件/文件上传
+FileField---文件
+FilePathField  ---文件路径
+ImageField----图片
+布尔
+BooleanField---True/False
+NullBooleanField---None/True/False
+正则
+RegexField---正则输入
