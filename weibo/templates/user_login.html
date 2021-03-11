@@ -5,8 +5,10 @@
     <title>用户登录</title>
 </head>
 <body>
-<form action="user_login.html" method="post">
+<form action="{% url 'weibo:user_login' %}" method="post">
     {{ form.as_p }}
+    {% csrf_token %}
+    <input type="submit" value="提交">
 </form>
 </body>
 </html>

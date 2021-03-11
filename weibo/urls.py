@@ -34,5 +34,7 @@ urlpatterns = [
     url(r'^form/page_form/first$', views.page_form_first, name='page_form_first'),
     # 以后登录
     url(r'^user/login$', views.user_login, name='user_login'),
+    # 用户注册
+    url(r'^user/regist$', views.user_regist, name='user_regist'),
 
 ]

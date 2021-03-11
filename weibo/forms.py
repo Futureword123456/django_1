@@ -33,6 +33,18 @@ class LoginForm(forms.Form):
 
 
 class UserLoginForm(forms.Form):
+    """"用户登录"""
     username = forms.CharField(label='用户名', max_length=64)
     password = forms.CharField(label='密码', max_length=64, widget=forms.PasswordInput)
     verify_code = forms.CharField(label='验证码', max_length=6)
+
+
+class UserRegistForm(forms.Form):
+    """用户注册表单"""
+    username = forms.CharField(label='用户名', max_length=64)
+    nickname=forms.CharField(label='昵称',max_length=64)
+    password = forms.CharField(label='密码', max_length=64, widget=forms.PasswordInput)
+    repassword = forms.CharField(label='重复密码', max_length=64, widget=forms.PasswordInput)
+
+    verify_code = forms.CharField(label='验证码', max_length=6)
+

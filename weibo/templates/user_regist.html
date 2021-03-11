@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>用户注册</title>
+</head>
+<body>
+<form action="{% url 'weibo:user_regist' %}" method="post">
+    {{ form.as_p }}
+    {% csrf_token %}
+    <input type="submit" value="注册并登录">
+    </form>
+</body>
+</html>
