@@ -268,6 +268,7 @@ def page_form_first(request):
             """获取表单数据"""
             data = form.cleaned_data
             print(data)
+            """其他"""
         else:
             form = LoginForm()
     return render(request, 'page_form_first.html', {

@@ -6,6 +6,8 @@
 import form as form
 from django import forms
 
+"""导入forms"""
+
 
 class LoginForm(forms.Form):
     """表单类"""
