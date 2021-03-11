@@ -6,7 +6,8 @@
 </head>
 <body>
 <form action="{% url 'weibo:page_form_first'%}" method="post">
-    {{ form }}
+    {{ form.as_p }}
+    {% csrf_token %}
     <input type="submit" value="提交">
 </form>
 </body>

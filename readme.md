@@ -99,7 +99,49 @@ POST请求
 request.POST.get('name',None)
 django表单
 第一步 创建表单类
+class LoginForm(forms.Form):
+    """表单类"""
+    username = forms.CharField(label='用户名', max_length=64)
 
 第二部 添加到视图
+
+def page_form_first(request):
+    """第一个表单"""
+    if request.method == 'POST':
+        """得到表单对象"""
+        form = LoginForm(request.POST)
+        """验证表单是否有效"""
+        if form.is_valid():
+            """获取表单数据"""
+            data = form.cleaned_data
+            print("data:".format(data))
+            """其他"""
+    else:
+        form = LoginForm()
+    return render(request, 'page_form_first.html', {
+        'form': form
+    })
+
 第三步 渲染到模板
+ return render(request, 'page_form_first.html', {
+        'form': form
+    })
 第四步 在视图中处理表单数据
+is_bound判断是否绑定数据
+is_valid()判断是否已经通过验证
+ data = form.cleaned_data-----访问表单验证后的数据
+ 
+as_p段落
+errors----表单验证后的错误信息
+field 表单字段
+initial ---初始化数据
+字段常用的参数
+required默认是必填 
+label ----label标签(如:输入框前的文字描述)
+initial ---初始化数据
+wedget----定制界面显示的方式（如：文本框，选择框）
+help_text--帮助文章
+error_messages---覆盖字段引发的异常错误显示
+localize ----本地化，根据用户所在地区进行格式化显示
+disabled---禁用表单，界面上不可以操作
+has_changed()---值是否发生了变化

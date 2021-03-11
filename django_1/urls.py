@@ -64,10 +64,16 @@ urlpatterns = [
     url(r'^now/$', views.now_use_file),
     # 微博模块
     url(r'^weibo/', include('weibo.urls', namespace='weibo')),
-    path('__debug__/', include(debug_toolbar.urls)),
+
 ]
 """添加自定义的静态资源"""
 urlpatterns += [url(r'^medias/(?P<path>.*)$', serve, {
     'document_root': settings.MEDIAS_ROOT,
 
 }),]
+# if settings.DEBUG:
+#     import debug_toolbar
+#     urlpatterns = [
+#         url(r'^__debug__/', include(debug_toolbar.urls)),
+#
+#     ] + urlpatterns

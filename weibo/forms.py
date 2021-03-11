@@ -11,4 +11,4 @@ from django import forms
 
 class LoginForm(forms.Form):
     """表单类"""
-    username = forms.CharField(label='用户名', max_length=64)
+    username = forms.CharField(label='用户名', max_length=64,required=False,initial="你好")

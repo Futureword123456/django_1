@@ -264,13 +264,18 @@ def page_form_first(request):
         """得到表单对象"""
         form = LoginForm(request.POST)
         """验证表单是否有效"""
+        print(form.is_bound)
         if form.is_valid():
             """获取表单数据"""
             data = form.cleaned_data
-            print(data)
+            print("data{0}:".format(data))
             """其他"""
-        else:
-            form = LoginForm()
+    else:
+        """得到表单对象"""
+        """以最后渲染的数据为准"""
+        form = LoginForm(initial={'username': 'hello'})
+
+        print(form.is_bound)
     return render(request, 'page_form_first.html', {
         'form': form
     })
