@@ -19,12 +19,15 @@
         <!--用户名-->
     </div>
     <div>
-        {{ form.password }}
+        {{ form.password.as_text }}
         <!--密码-->
     </div>
     <div>
         {{ form.verify_code }}
         <!--验证码-->
+    </div>
+    <div>
+        {{ form.non_field_errors.as_text }}
     </div>
 {#    {{ form.as_p }}#}
     {% csrf_token %}

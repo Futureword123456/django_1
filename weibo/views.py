@@ -288,13 +288,12 @@ def user_login(request):
         form = UserLoginForm(request.POST)
         # 表单是否通过验证
         if form.is_valid():
-
-            data = form.cleaned_data
-            print(data['password'])
+            print('验证通过')
+            # data = form.cleaned_data
+            # print(data['password'])
             pass
         else:
             print(form.errors)
-
     else:
         form = UserLoginForm()
     return render(request, 'user_login.html', {

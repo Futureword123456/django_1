@@ -3,10 +3,10 @@ from django.contrib.auth.models import User
 
 
 # Create your models here.
-class UserManager(models.Manager):
-    def top_users(self):
-        # 2、调用现有的方法
-        return self.all().order_by('-create_at'[:5])
+# class UserManager(models.Manager):
+#     def top_users(self):
+#         # 2、调用现有的方法
+#         return self.all().order_by('-create_at'[:5])
 
 
 class WeiboUser(models.Model):
@@ -24,7 +24,7 @@ class WeiboUser(models.Model):
     updated_at = models.DateTimeField('最后修改时间', null=True, blank=True)
     content = models.CharField('内容', max_length=256)
     """自定义管理器"""
-    users = UserManager()
+    # users = UserManager()
 
     class Meta:
         db_table = "weibo_user"
