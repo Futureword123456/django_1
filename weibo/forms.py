@@ -92,10 +92,19 @@ class UserForm(forms.ModelForm):
         """需要显示的字段"""
         fields = ['username', 'password', 'nickname']
         """密码显示......界面显示修改"""
+        """css的class"""
         widgets = {
-            'password': forms.PasswordInput
+            'password': forms.PasswordInput(attrs={
+                'class':'text-err'
+            })
         }
-
         labels = {
             'username': '手机号码'
+        }
+        """重写错误"""
+        error_messages = {
+            'username': {
+                'required': '请输入手机号码',
+                'max_length': '最长不超过32位'
+            }
         }
