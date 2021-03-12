@@ -37,7 +37,7 @@ class LoginForm(forms.Form):
 
 
 class UserLoginForm(forms.Form):
-    """"用户登录"""
+    """"用户登录创建表单"""
     """前台传到的后台数据"""
     username = forms.CharField(label='用户名', max_length=64)
     password = forms.CharField(label='密码', max_length=64, widget=forms.PasswordInput)
@@ -81,5 +81,21 @@ class UserRegistForm(forms.Form):
     nickname = forms.CharField(label='昵称', max_length=64)
     password = forms.CharField(label='密码', max_length=64, widget=forms.PasswordInput)
     repassword = forms.CharField(label='重复密码', max_length=64, widget=forms.PasswordInput)
-
     verify_code = forms.CharField(label='验证码', max_length=6)
+
+
+class UserForm(forms.ModelForm):
+    """从模型创建表单"""
+
+    class Meta:
+        model = WeiboUser
+        """需要显示的字段"""
+        fields = ['username', 'password', 'nickname']
+        """密码显示......界面显示修改"""
+        widgets = {
+            'password': forms.PasswordInput
+        }
+
+        labels = {
+            'username': '手机号码'
+        }

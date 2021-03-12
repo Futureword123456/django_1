@@ -36,5 +36,7 @@ urlpatterns = [
     url(r'^user/login$', views.user_login, name='user_login'),
     # 用户注册
     url(r'^user/regist$', views.user_regist, name='user_regist'),
+    # 用户的编辑
+    url(r'^user/edit$', views.user_edit, name='user_edit'),
 
 ]

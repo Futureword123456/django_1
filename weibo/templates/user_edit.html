@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>用户的信息编辑</title>
+</head>
+<body>
+<h2>orm创建表单</h2>
+<form action="{% url 'weibo:user_edit' %}">
+    {{ form.as_p }}
+    {% csrf_token %}
+    <input type="submit" value="更新用户数据">
+</form>
+</body>
+</html>

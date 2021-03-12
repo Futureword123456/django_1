@@ -7,7 +7,7 @@ from django.http import HttpResponse
 from django.shortcuts import render
 
 from utils.sqlpage import SqlPaginator, PageNumError
-from weibo.forms import LoginForm, UserLoginForm, UserRegistForm
+from weibo.forms import LoginForm, UserLoginForm, UserRegistForm, UserForm
 from weibo.models import WeiboUser as User, Comment, Weibo, WeiboUser
 
 
@@ -307,4 +307,12 @@ def user_regist(request):
     form = UserRegistForm()
     return render(request, 'user_regist.html', {
         'form': form
+    })
+
+
+def user_edit(request):
+    """模型创建表单"""
+    form = UserForm()
+    return render(request,'user_edit.html',{
+        'form':form
     })
