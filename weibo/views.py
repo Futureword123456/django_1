@@ -283,12 +283,26 @@ def page_form_first(request):
 
 def user_login(request):
     """用户登录"""
-    form = UserLoginForm()
+    if request.method == 'POST':
+        form = UserLoginForm(request.POST)
+        # 表单是否通过验证
+        if form.is_valid():
+            # data = form.cleaned_data
+            # print(data)
+            pass
+        else:
+            print(form.errors)
+
+    else:
+        form = UserLoginForm()
     return render(request, 'user_login.html', {
         'form': form
     })
+
+
 def user_regist(request):
     """用户注册"""
+    """拿到用户注册表单的对象渲染到前端"""
     form = UserRegistForm()
     return render(request, 'user_regist.html', {
         'form': form

@@ -3,10 +3,30 @@
 <head>
     <meta charset="UTF-8">
     <title>用户登录</title>
+    <style>
+        .errorlist{
+            color: red;
+        }
+    </style>
 </head>
 <body>
 <form action="{% url 'weibo:user_login' %}" method="post">
-    {{ form.as_p }}
+    <!-- 表单内容的展示-->
+    <div>
+        {{ form.username.label }}
+        {{ form.username }}
+        {{ form.username.errors.as_text }}
+        <!--用户名-->
+    </div>
+    <div>
+        {{ form.password }}
+        <!--密码-->
+    </div>
+    <div>
+        {{ form.verify_code }}
+        <!--验证码-->
+    </div>
+{#    {{ form.as_p }}#}
     {% csrf_token %}
     <input type="submit" value="提交">
 </form>

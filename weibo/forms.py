@@ -3,6 +3,8 @@
 # @Author : yang
 # @Email : 2635681517@qq.com
 # @File : forms.py
+import re
+
 import form as form
 from django import forms
 
@@ -38,13 +40,21 @@ class UserLoginForm(forms.Form):
     password = forms.CharField(label='密码', max_length=64, widget=forms.PasswordInput)
     verify_code = forms.CharField(label='验证码', max_length=6)
 
+    def clean_username(self):
+        """验证用户名"""
+        username = self.cleaned_data['username']
+        print(username)
+        # 判断用户名是否为手机号码
+        pattern = r'^(13[0-9]|14[5|7]|15[0|1|2|3|4|5|6|7|8|9]|18[0|1|2|3|5|6|7|8|9])\d{8}$'
+        if not re.search(pattern,username):
+            raise forms.ValidationError('请输入正确的手机号码')
+
 
 class UserRegistForm(forms.Form):
     """用户注册表单"""
     username = forms.CharField(label='用户名', max_length=64)
-    nickname=forms.CharField(label='昵称',max_length=64)
+    nickname = forms.CharField(label='昵称', max_length=64)
     password = forms.CharField(label='密码', max_length=64, widget=forms.PasswordInput)
     repassword = forms.CharField(label='重复密码', max_length=64, widget=forms.PasswordInput)
 
     verify_code = forms.CharField(label='验证码', max_length=6)
-
