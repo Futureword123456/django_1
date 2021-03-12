@@ -36,6 +36,7 @@ class LoginForm(forms.Form):
 
 class UserLoginForm(forms.Form):
     """"用户登录"""
+    """前台传到的后台数据"""
     username = forms.CharField(label='用户名', max_length=64)
     password = forms.CharField(label='密码', max_length=64, widget=forms.PasswordInput)
     verify_code = forms.CharField(label='验证码', max_length=6)
@@ -43,12 +44,14 @@ class UserLoginForm(forms.Form):
     def clean_username(self):
         """验证用户名"""
         username = self.cleaned_data['username']
+
         print(username)
         # 判断用户名是否为手机号码
         pattern = r'^(13[0-9]|14[5|7]|15[0|1|2|3|4|5|6|7|8|9]|18[0|1|2|3|5|6|7|8|9])\d{8}$'
+        if not username:
+            raise forms.ValidationError('请输入用户名')
         if not re.search(pattern,username):
             raise forms.ValidationError('请输入正确的手机号码')
-
 
 class UserRegistForm(forms.Form):
     """用户注册表单"""

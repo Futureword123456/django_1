@@ -284,11 +284,13 @@ def page_form_first(request):
 def user_login(request):
     """用户登录"""
     if request.method == 'POST':
+        # 这个form是得到前台传过来的数据,这里得到的是字典对象的数据
         form = UserLoginForm(request.POST)
         # 表单是否通过验证
         if form.is_valid():
-            # data = form.cleaned_data
-            # print(data)
+
+            data = form.cleaned_data
+            print(data['password'])
             pass
         else:
             print(form.errors)
