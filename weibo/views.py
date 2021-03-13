@@ -1,3 +1,4 @@
+import os
 from datetime import datetime
 
 from django.core.paginator import Paginator, PageNotAnInteger, EmptyPage
@@ -6,6 +7,7 @@ from django.db.models import Q
 from django.http import HttpResponse
 from django.shortcuts import render
 
+from django_1 import settings
 from utils.sqlpage import SqlPaginator, PageNumError
 from weibo.forms import LoginForm, UserLoginForm, UserRegistForm, UserForm
 from weibo.models import WeiboUser as User, Comment, Weibo, WeiboUser
@@ -313,6 +315,18 @@ def user_regist(request):
 def user_edit(request):
     """模型创建表单"""
     form = UserForm()
-    return render(request,'user_edit.html',{
-        'form':form
+    return render(request, 'user_edit.html', {
+        'form': form
     })
+
+
+def file_upload_origin(request):
+    """文件上传"""
+    if request.method == 'POST':
+        file = request.FILES.get('avter', None)
+        filename = os.path.join(settings.MEDIAS_ROOT,'test.jpg')
+        with open(filename, 'wb+') as f:
+            for chunk in file.chunks():
+                f.write(chunk)
+            print('上传成功')
+    return render(request, 'file_upload_origin.html')

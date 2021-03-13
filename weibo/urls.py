@@ -38,5 +38,7 @@ urlpatterns = [
     url(r'^user/regist$', views.user_regist, name='user_regist'),
     # 用户的编辑
     url(r'^user/edit$', views.user_edit, name='user_edit'),
+    # 文件上传
+    url(r'^file/upload/origin$', views.file_upload_origin, name='file_upload_origin'),
 
 ]

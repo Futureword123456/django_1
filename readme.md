@@ -184,3 +184,4 @@ Meta：配置选项 widgets---修改展现样式(文本输入，数字输入)
 help_text-----设置帮助文字
 labels 设置表单输入的文字提示
 error_messages---设置表单错误提示
+文件表单上传

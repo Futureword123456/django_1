@@ -59,7 +59,8 @@ class UserLoginForm(forms.Form):
     def clean_password(self):
         """验证密码"""
         password = self.cleaned_data['password']
-        if len(password) < 6 or len(password) > 12:
+        print(password)
+        if len(password) < 6 or len(password) > 12 or len(password) < 0:
             raise forms.ValidationError('请输入6到12位的密码')
         if not password:
             raise forms.ValidationError('请输入密码')
@@ -94,7 +95,7 @@ class UserRegistForm(forms.Form):
 
 class UserForm(forms.ModelForm):
     """从模型创建表单"""
-
+    """原类"""
     class Meta:
         model = WeiboUser
         """需要显示的字段"""
