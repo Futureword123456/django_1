@@ -63,6 +63,7 @@ class UserLoginForm(forms.Form):
             raise forms.ValidationError('请输入6到12位的密码')
         if not password:
             raise forms.ValidationError('请输入密码')
+        return password
 
     def clean(self):
         """多个字段进行组合验证 后端验证"""
@@ -72,7 +73,6 @@ class UserLoginForm(forms.Form):
         """取用户名和密码"""
         username = cleaned_data.get('username', None)
         password = cleaned_data.get('password', None)
-
         if username and password:
             # """数据库查询用户名和密码"""
             user_list = WeiboUser.objects.filter(username=username)
