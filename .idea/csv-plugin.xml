@@ -59,6 +59,13 @@
             </Attribute>
           </value>
         </entry>
+        <entry key="\weibo\forms.py">
+          <value>
+            <Attribute>
+              <option name="separator" value="," />
+            </Attribute>
+          </value>
+        </entry>
         <entry key="\weibo\models.py">
           <value>
             <Attribute>

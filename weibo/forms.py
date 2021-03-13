@@ -44,9 +44,9 @@ class UserLoginForm(forms.Form):
     verify_code = forms.CharField(label='验证码', max_length=6)
 
     def clean_username(self):
-        """验证用户名,前端验证"""
+        """验证用户名,前端验证,每一个字段的验证"""
+        """得到前端传的数据"""
         username = self.cleaned_data['username']
-
         print(username)
         # 判断用户名是否为手机号码
         pattern = r'^(13[0-9]|14[5|7]|15[0|1|2|3|4|5|6|7|8|9]|18[0|1|2|3|5|6|7|8|9])\d{8}$'
@@ -55,6 +55,14 @@ class UserLoginForm(forms.Form):
         if not re.search(pattern, username):
             raise forms.ValidationError('请输入正确的手机号码')
         return username
+
+    def clean_password(self):
+        """验证密码"""
+        password = self.cleaned_data['password']
+        if len(password) < 6 or len(password) > 12:
+            raise forms.ValidationError('请输入6到12位的密码')
+        if not password:
+            raise forms.ValidationError('请输入密码')
 
     def clean(self):
         """多个字段进行组合验证 后端验证"""
@@ -95,7 +103,7 @@ class UserForm(forms.ModelForm):
         """css的class"""
         widgets = {
             'password': forms.PasswordInput(attrs={
-                'class':'text-err'
+                'class': 'text-err'
             })
         }
         labels = {
